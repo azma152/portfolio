@@ -10,61 +10,57 @@ particlesJS('particles-js',
     {
         "particles": {
             "number": {
-                "value": 80,
+                "value": 50,  // More particles
                 "density": {
                     "enable": true,
                     "value_area": 800
                 }
             },
             "color": {
-                "value": ["#7C3AED", "#00D4FF", "#FF3D71"]
+                "value": ["#7C3AED", "#00D4FF", "#FF3D71"]  // Back to original colors
             },
             "shape": {
-                "type": "circle"
+                "type": "circle",  // Changed to circles
+                "stroke": {
+                    "width": 1,
+                    "color": "#7C3AED"
+                }
             },
             "opacity": {
-                "value": 1,
-                "random": false,
+                "value": 0.7,
+                "random": true,
                 "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.7,
+                    "enable": true,
+                    "speed": 3,
+                    "opacity_min": 0.3,
                     "sync": false
                 }
             },
             "size": {
-                "value": 3,
+                "value": 8,  // Smaller size
                 "random": true,
                 "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
+                    "enable": true,
+                    "speed": 4,
+                    "size_min": 4,
                     "sync": false
                 }
             },
             "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#7C3AED",
-                "opacity": 0.6,
-                "width": 1.5,
-                "triangles": {
-                    "enable": false,
-                    "opacity": 0.1
-                }
+                "enable": false
             },
             "move": {
                 "enable": true,
-                "speed": 3,
+                "speed": 6,  // Faster for better responsiveness
                 "direction": "none",
-                "random": true,
+                "random": false,
                 "straight": false,
-                "out_mode": "out",
+                "out_mode": "out",  // Changed to out for smoother movement
                 "bounce": false,
                 "attract": {
                     "enable": true,
-                    "rotateX": 3000,
-                    "rotateY": 3000
+                    "rotateX": 600,
+                    "rotateY": 1200
                 }
             }
         },
@@ -77,29 +73,23 @@ particlesJS('particles-js',
                 },
                 "onclick": {
                     "enable": true,
-                    "mode": "repulse"
+                    "mode": "push"
                 },
                 "resize": true
             },
             "modes": {
                 "attract": {
-                    "distance": 200,
+                    "distance": 150,  // Shorter distance for tighter following
                     "duration": 0.4,
                     "speed": 5,
-                    "line_linked": {
-                        "opacity": 1
-                    }
+                    "factor": 25  // Much stronger attraction
+                },
+                "push": {
+                    "particles_nb": 3
                 },
                 "repulse": {
-                    "distance": 200,
+                    "distance": 100,
                     "duration": 0.4
-                },
-                "grab": {
-                    "distance": 300,
-                    "line_linked": {
-                        "opacity": 1,
-                        "color": "#7C3AED"
-                    }
                 }
             }
         },
@@ -528,4 +518,46 @@ nextBtn.addEventListener('click', () => {
 });
 
 // Initialize projects view
-updateProjectsView(); 
+updateProjectsView();
+
+// Add custom particle effects
+let lastTime = 0;
+const particlesContainer = document.getElementById('particles-js');
+const canvas = particlesContainer.getElementsByTagName('canvas')[0];
+
+function createRipple(x, y) {
+    let ripple = {
+        x: x,
+        y: y,
+        radius: 0,
+        opacity: 0.5,
+        maxRadius: 100
+    };
+    
+    function drawRipple() {
+        ctx.beginPath();
+        ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(124, 58, 237, ${ripple.opacity})`;
+        ctx.stroke();
+        
+        ripple.radius += 2;
+        ripple.opacity -= 0.01;
+        
+        if (ripple.radius < ripple.maxRadius && ripple.opacity > 0) {
+            requestAnimationFrame(drawRipple);
+        }
+    }
+    
+    drawRipple();
+}
+
+document.addEventListener('mousemove', (e) => {
+    const currentTime = Date.now();
+    if (currentTime - lastTime > 50) { // Limit ripple creation to every 50ms
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        createRipple(x, y);
+        lastTime = currentTime;
+    }
+}); 
