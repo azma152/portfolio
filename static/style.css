@@ -663,10 +663,11 @@ section {
 }
 
 .project-links {
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.2rem;
+    align-items: center;
 }
 
 .project-icon {
@@ -683,12 +684,13 @@ section {
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
+    border: 2px solid transparent;
 }
 
 .project-icon:hover {
     color: var(--light-color);
     background: var(--primary-color);
-    transform: translateY(-3px) scale(1.1);
+    transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
