@@ -20,7 +20,7 @@ particlesJS('particles-js',
                 "value": ["#7C3AED", "#00D4FF", "#FF3D71"]  // Back to original colors
             },
             "shape": {
-                "type": "circle",  // Changed to circles
+                "type": "",  // Changed to circles
                 "stroke": {
                     "width": 1,
                     "color": "#7C3AED"
