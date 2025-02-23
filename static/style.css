@@ -489,17 +489,16 @@ section {
 
 /* Skills Section */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1600px;
-    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .skill-card {
     background: var(--card-bg);
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2rem;
     text-align: center;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -508,6 +507,7 @@ section {
     border: 2px solid transparent;
     z-index: 1;
     overflow: hidden;
+    width: 200px;
 }
 
 .skill-card::before {
@@ -524,7 +524,7 @@ section {
 }
 
 .skill-card i {
-    font-size: 3rem;
+    font-size: 4rem;
     background: var(--gradient-1);
     -webkit-background-clip: text;
     background-clip: text;
@@ -536,7 +536,7 @@ section {
 .skill-card h3 {
     color: var(--text-color);
     margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: all 0.3s ease;
 }
 
